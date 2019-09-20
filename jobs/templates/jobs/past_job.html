@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block title %}Past_job{% endblock title %}
+
+{% block body %}
+  <h1>{{ job.name }}님의 직업은 {{ job.past_job }}입니다.</h1>
+  <img src="{{ picture }}" alt="">
+  <a href="{% url 'jobs:search' %}">[뒤로가기]</a>
+{% endblock body %}
