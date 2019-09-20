@@ -7,6 +7,7 @@ urlpatterns= [
     # 입력 페이지 제공
     # path('new/', views.new, name='new'),
     # 데이터를 전달받아서 article 생성
+    path('<int:article_pk>/comments/', views.comments_create, name='comments_create'),
     path('create/', views.create, name='create'),
     path('', views.index, name='index'),
     path('<int:article_pk>/', views.detail, name='detail'), # detatil

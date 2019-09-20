@@ -7,6 +7,23 @@
   <p>작성일자: {{ article.created_at }}</p>
   <hr>
   <p>{{ article.content }}</p>
+  <hr>
+  <h4>Comments</h4>
+  
+  <form action="{% url 'articles:comments_create' article.pk %}" method="POST">
+    {% csrf_token %}
+    <input type="text" name="content">
+    <button type="submit">[등록하기]</button>
+  </form>
+
+  <ul>
+  {% for comment in comments %}
+    <li>{{ comment.content }}</li>
+  {% empty %}
+    <p>아직 댓글이 없습니다.</p>
+  {% endfor %}
+  </ul>
+
   <form action="{% url 'articles:update' article.pk %}" method="GET">
     {% csrf_token %}
     <button type="submit">수정하기</button>
