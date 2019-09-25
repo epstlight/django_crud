@@ -1,9 +1,11 @@
 {% extends 'base.html' %}
 {% block title %}Index{% endblock title %}
-
+{% load static %}
 {% block body %}
   <h1>Index</h1>
-  <a href="{% url 'articles:create' %}">작성하기</a><hr>
+  <img src="{% static 'articles/images/picture.jpg' %}" alt="picture">
+  <a href="{% url 'articles:create' %}">작성하기</a>
+  <hr>
   {% for article in articles %}
     <div>
       <h3><a href="{% url 'articles:detail' article.pk %}">{{ article.pk}}. {{ article.title }}</a></h3>
