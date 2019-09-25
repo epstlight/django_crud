@@ -32,7 +32,7 @@ def index(request):
 
 def detail(request, article_pk):
     article = get_object_or_404(Article, pk=article_pk)
-    comments = article.comment_set.all()
+    comments = article.comments.all()
     context = {
         'article': article,
         'comments':comments,
@@ -74,3 +74,10 @@ def comments_create(request, article_pk):
         comment.save()
     return redirect('articles:detail', article_pk)
 
+
+def comments_delete(request, article_pk, comment_pk):
+    if request.method == 'POST':
+    # article = get_object_or_404(Article, pk=article_pk)
+        comment = get_object_or_404(Comment, pk=comment_pk)
+        comment.delete()
+    return redirect('articles:detail', article_pk)
