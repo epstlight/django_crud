@@ -12,9 +12,8 @@ def create(request):
     if request.method == 'POST':
         title = request.POST.get('title')
         content = request.POST.get('content')
-        article = Article()
-        article.title = title
-        article.content = content
+        image = request.FILES.get('image')
+        article = Article(title=title, content=content, image=image)
         article.save()
         return redirect('articles:detail', article.pk)
     #만약 GET 요청으로 들어오면 HTML 페이지 rendering
@@ -54,10 +53,13 @@ def update(request, article_pk):
     if request.method == 'POST':
         title = request.POST.get('title')
         content = request.POST.get('content')
+        image = request.FILES.get('image')
+        if image:
+            article.image = image
         article.title = title
         article.content = content
         article.save()
-        return redirect('articles:index')
+        return redirect('articles:detail', article_pk)
     else:
         return render(request, 'articles/update.html', {'article': article})
 
