@@ -17,16 +17,14 @@ def search(request):
 def past_job(request):
     if request.method == 'POST':
         name = request.POST.get('name')
+        image = request.FILES.get('image')
         jobs = Job.objects.all()
-        for job in jobs:
-            if job.name == name:
-                context = {'job':job, 'picture': image_find(job.past_job)}
-                return render(request, 'jobs/past_job.html', context)
-        
+        # for job in jobs:
+        #     if job.name == name:
+        #         context = {'job':job, 'picture': image_find(job.past_job)}
+        #         return render(request, 'jobs/past_job.html', context)
         fake = Faker('')
-        job = Job()
-        job.name = name
-        job.past_job = fake.job()
+        job = Job(name=name, past_job=fake.job(), profile_image=image)
         job.save()
         context = {'job':job, 'picture': image_find(job.past_job)}
         return render(request, 'jobs/past_job.html', context)
